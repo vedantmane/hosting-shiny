@@ -1,0 +1,10 @@
+name: predictionapp
+title:
+username:
+account: vedantmane
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2552671
+bundleId: 3371823
+url: https://vedantmane.shinyapps.io/predictionapp/
+when: 1594301475.82207

@@ -1,0 +1,59 @@
+Simple Prediction App
+========================================================
+author: Vedant Mane
+date: July 09, 2020
+autosize: true
+
+Overview
+========================================================
+
+The prediction application has been designed to predict the Volume of the tree based on the details of Girth of the Tree provided by the user.
+```{r overview, echo=FALSE}
+print("Trees Dataset")
+head(trees)
+```
+The application has been uploaded at the following link.
+<https://vedantmane.shinyapps.io/predictionapp/>  
+
+
+Model Trees
+========================================================
+
+```{r model,echo=FALSE}
+summary(trees)
+model <- lm(Volume ~ Girth, data = trees)
+summary(model)$call
+summary(model)$coef
+```
+
+Model Plot & Coefficients
+========================================================
+
+```{r plot, echo=FALSE}
+plot(trees$Girth, trees$Volume, xlab = "Girth of Trees", ylab = "Volume of Trees",
+     main = "Trees Dataset", col = "black", cex = 2,
+     bty = "n", pch = 19, xlim = c(8,22), ylim = c(08,80))
+points(trees$Girth, trees$Volume, cex = 1.6, col = "orangered", pch = 19)
+modelLines <- predict(model, newdata = data.frame(Girth = 5:25))
+lines(5:25, modelLines, col = "red", lwd = 2)
+```
+
+***
+
+<br>
+```{r coef, echo=FALSE}
+paste("Intercept : ", coef(model)[1])
+paste("Slope : ", coef(model)[2])
+```
+
+Prediction
+========================================================
+
+Predicting some sample Girth values that may be selected from our app :
+
+```{r predict, echo=FALSE}
+tempGirth <- c(10, 12, 14, 16, 18, 20)
+predVolume <- predict(model, newdata = data.frame(Girth = tempGirth))
+mat <- cbind(Girth = tempGirth, Volume = predVolume)
+mat
+```
